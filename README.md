@@ -1,17 +1,18 @@
 # Minecraft 完整下载器（Python）
 
-命令行工具，把任意版本的 Minecraft **连同加载器一起**下载到指定 `.minecraft` 目录，**只负责下载，不启动游戏**。
+命令行工具，把任意版本的 Minecraft **连同加载器一起**下载到指定 `.minecraft` 目录
 
-实现方式：基于成熟的 [`minecraft-launcher-lib`](https://github.com/JakobDev/minecraft-launcher-lib)，
-它已经完整实现了 Mojang 的下载协议和各家加载器的安装流程，这里只做中文 CLI 封装，
-所以不会出现"文件下了一半、Forge processors 没跑"这种半成品。
+基于成熟的 [`minecraft-launcher-lib`](https://github.com/JakobDev/minecraft-launcher-lib)，
 
 默认还会把下载地址改写成 **BMCLAPI 镜像**。
 > 下载时自行搜索Minecraft版本是否支持加载器
-  *免责声明*
-  本工具为纯技术下载工具。
-  用户需自行确保其下载和使用行为，符合所在国家/地区的法律法规以及游戏发行商的区域政策。
-  请确保您已拥有该游戏的正版授权。
+> 
+  
+> **免责声明**  
+  - 本工具为纯技术下载工具。  
+  - 用户需自行确保其下载和使用行为，符合所在国家/地区的法律法规以及游戏发行商的区域政策。  
+  - 请确保您已拥有该游戏的正版授权。
+---
   
 ## 支持范围
 
@@ -152,7 +153,7 @@ python mc_download.py --version 1.20.4 --engine legacy   # 回到库的串行实
 
 线程数默认 48；网络差或镜像限流时可以降到 8~16，反之可以继续调高（对大量小文件收益明显）。
 
-## 多个下载源（BMCLAPI，规则照搬 PCL2）
+## 多个下载源\
 
 `--source` 接受逗号分隔的源列表，按优先级依次尝试，前一个源 404 / 超时就换下一个：
 
@@ -201,16 +202,6 @@ python mc_download.py --version 1.20.4 --mirror my=https://mc.example.com --sour
 │   └── objects\<hash前2位>\<hash>
 └── logging\                        日志配置（新版 MC 需要）
 ```
-
-
-## 说明与常见问题
-
-
-- **加载器版本支持**：Fabric 从 Minecraft 1.14 才开始支持，1.13 及更早没有 Fabric。
-  选到不兼容的组合时，工具会先提示，并可直接改选原版；例如 **1.11.1 只能用原版或 Forge**，
-  装 Fabric 会得到 `Version 1.11.1 is not supported`（现在会在开始下载前就拦下来）。
-- **Java 版本**：原版 1.17+ 需要 Java 17，1.20.5+ 需要 Java 21，老版本用 Java 8。
-  Forge / NeoForge 的安装器需要本机已有 Java，工具本身不会安装 JDK。
 - **不启动游戏**：本工具没有任何启动游戏的代码路径（不调用 `command`、不启动 Java 进程运行游戏），
   下载完就退出，启动请用你自己的启动器。
 - **版本号写法**：NeoForge 的版本号是按 MC 版本推出的（1.20.1 → `47.x`，1.20.2+ → `20.2.x` 这种）；
